@@ -41,6 +41,8 @@ jobs:
           name: release-dists
           path: dist/
 
+
+  
   pypi-publish:
     runs-on: ubuntu-latest
     needs:
@@ -51,6 +53,13 @@ jobs:
         with:
           name: release-dists
           path: dist/
+
+          ## Delete once tested
+      - name: Debug secrets
+        run: echo "TWINE_PASSWORD is set"
+        env:
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+          ## Delete once tested
 
       - name: Publish release distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1

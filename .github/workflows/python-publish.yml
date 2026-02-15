@@ -22,6 +22,24 @@ on:
   #contents: read
 
 jobs:
+
+  bump-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Bump version
+        uses: jaimevalero/pyproject-bump-version@v1
+        with:
+          bump-type: patch   # or minor / major
+
+      - name: Commit bumped version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "Bump version"
+          git push
+
   release-build:
     runs-on: ubuntu-latest
     steps:

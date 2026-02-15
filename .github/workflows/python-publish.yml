@@ -32,8 +32,9 @@ jobs:
       - name: Build release distributions
         run: |
           # NOTE: put your own distribution build steps here.
-          rm -rf dist
-          python -m pip install build
+          rm -rf dist build *.egg-info
+          python -m pip install --upgrade pip
+          pip install build
           python -m build
 
       - name: Upload distributions
@@ -41,8 +42,6 @@ jobs:
         with:
           name: release-dists
           path: dist/
-
-
   
   pypi-publish:
     runs-on: ubuntu-latest
@@ -50,6 +49,7 @@ jobs:
       - release-build
     permissions:
       id-token: write
+      contents: read
     steps:
       - name: Retrieve release distributions
         uses: actions/download-artifact@v4
@@ -64,15 +64,3 @@ jobs:
        # env:
         #  TWINE_USERNAME: __token__
          # TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-
-
-   # Dedicated environments with protections for publishing are strongly recommended.
-    # For more information, see: https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#deployment-protection-rules
-    #environment: <--- This is for test -->
-      #name: pypi
-      # OPTIONAL: uncomment and update to include your PyPI project URL in the deployment status:
-      # url: https://pypi.org/p/YOURPROJECT
-      #
-      # ALTERNATIVE: if your GitHub Release name is the PyPI project version string
-      # ALTERNATIVE: exactly, uncomment the following line instead:
-      # url: https://pypi.org/project/YOURPROJECT/${{ github.event.release.name }}

@@ -31,7 +31,7 @@ jobs:
       - name: Auto bump version 
         run: | 
           pip install toml
-          python bump_version.py
+          python .github/workflows/bump_version.py
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -am "Bump version"

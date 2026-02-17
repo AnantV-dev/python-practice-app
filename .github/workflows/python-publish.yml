@@ -18,8 +18,8 @@ on:
   release: 
       types: [published]
 
-#permissions:
-  #contents: read
+permissions:
+  contents: write
 
 jobs:
 

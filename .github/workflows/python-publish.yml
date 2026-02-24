@@ -83,7 +83,7 @@ jobs:
   pypi-publish:
     runs-on: ubuntu-latest
     needs:
-      - testpypi-publish
+      - release-build
     permissions:
       id-token: write
       contents: read

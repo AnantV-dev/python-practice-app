@@ -104,4 +104,4 @@ jobs:
           ssh-keyscan -H 18.118.31.50 >> ~/.ssh/known_hosts
       - name: Copy build to server 
         run: | 
-          scp -i ~/.ssh/id_rsa -r ./dist master@18.118.31.50:/var/www/app/dist
+          scp -i ~/.ssh/id_rsa -r ./dist master@18.118.31.50:/var/www/app/

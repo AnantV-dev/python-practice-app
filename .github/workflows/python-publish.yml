@@ -91,6 +91,11 @@ jobs:
     steps:
       - name: Checkout code 
         uses: actions/checkout@v4
+      - name: Retrieve release distributions 
+        uses: actions/download-artifact@v4 
+        with: 
+          name: release-dists 
+          path: dist/
       - name: Setup SSH 
         run: | 
           mkdir -p ~/.ssh 
